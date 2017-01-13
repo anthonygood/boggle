@@ -9,14 +9,14 @@ class BoggleGrid extends Component {
   }
 
   render() {
-    window.bg = this
+    let letters = "ABCDEFGHIJKLMNOP"
     return (
       <div className="BoggleGrid">
 
         {this.grid.map ((row, rid) =>
-          <div className="row">
+          <div className="row" key={rid}>
             {row.map ((tile, tid) =>
-              <BoggleTile />
+              <BoggleTile key={tid} letter={letters[rid+tid]}/>
             )}
           </div>
         )}
