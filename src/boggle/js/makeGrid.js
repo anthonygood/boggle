@@ -1,34 +1,31 @@
-// Function for generating boggle grids.
+// Function for generating boggle grids. Takes a single argument, "size",
+// which determines the number of rows (all grids are square!)
 //
 // import makeGrid from "makeGrid.js"
-// makeGrid(size)
+// makeGrid(4)
 //
 // returns a two dimensional array of strings:
-// [['A', 'B', 'C', 'D'], ['E','F','G','H'], ['I','J','K','L'], ['M','N','O','P']]
+// [['A','B','C','D'], ['E','F','G','H'], ['I','J','K','L'], ['M','N','O','P']]
 //
 import shuffle from "./shuffle.js"
 import pickLetters from "./pickLetters.js"
 
 export default (size)=>{
-  let i, j;
-  function fillGrid(size, letters){
-    var grid = new Array(size);
-    for(i=0; i<size; i++){
 
-      //create sub-arrays for each row
-      grid[i] = new Array(size);
+  let letters = shuffle(
+    pickLetters(size * size)
+  )
 
-      //for each row, fill the array with letters
-      for(j=0; j<size; j++){
+  let grid = [], i, j
 
-        grid[i][j] = letters.pop();
-      }
+  for(i=0; i<size; i++){
+    let row = []
+    grid[i] = row
+
+    for(j=0; j<size; j++){
+      row[j] = letters.pop()
     }
-    return grid;
   }
 
-  var letters = pickLetters(size*size);
-  shuffle(letters);
-  var grid = fillGrid(size, letters);
-  return grid;
+  return grid
 }

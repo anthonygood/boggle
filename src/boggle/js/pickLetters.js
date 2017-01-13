@@ -1,7 +1,10 @@
-// simple function for generating a random selection of letters with good distribution
+// Function for generating a random selection of letters with good distribution
 //
 // import pick from 'pickLetters.js'
 // pick(4)
+//
+// returns an array: ["A", "I", "T", "M"]
+//
 export default (totalLetters)=>{
   const consonants = "BBCCDDDFFGGHHHHHJKLLLLMMNNNNNNPPQRRRRRSSSSSSTTTTTTTTTVVWWWXYYYZ",
         vowels = "AAAAAEEEEEIIIOOOUU",
