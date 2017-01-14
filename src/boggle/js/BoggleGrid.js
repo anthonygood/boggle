@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import BoggleTile from "./BoggleTile.js";
+import makeGrid from "../../lib/makeGrid.js";
 
 class BoggleGrid extends Component {
   constructor(props) {
     super(props)
 
-    this.grid = this._generateGrid(props.size)
+    this.grid = makeGrid(props.size)
   }
 
   render() {
-    let letters = "ABCDEFGHIJKLMNOP"
+    window.grid = this.grid
     return (
       <div className="BoggleGrid">
 
         {this.grid.map ((row, rid) =>
           <div className="row" key={rid}>
             {row.map ((tile, tid) =>
-              <BoggleTile key={tid} letter={letters[rid+tid]}/>
+              <BoggleTile key={tid} letter={tile}/>
             )}
           </div>
         )}
