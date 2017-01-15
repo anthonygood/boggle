@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import BoggleTile from "./BoggleTile.js";
-import makeGrid from "../../lib/makeGrid.js";
+import React, { Component } from "react"
+import BoggleTile from "./BoggleTile"
+import makeGrid from "../../lib/makeGrid"
 
 class BoggleGrid extends Component {
   constructor(props) {

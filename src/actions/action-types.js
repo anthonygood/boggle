@@ -1,0 +1,5 @@
+export const START_GAME              = "START_GAME"
+export const START_SELECTING_LETTERS = "START_SELECTING_LETTERS"
+export const ADD_LETTER              = "ADD_LETTER"
+export const END_SELECTING_LETTERS   = "END_SELECTING_LETTERS"
+export const END_GAME                = "END_GAME"

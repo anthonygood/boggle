@@ -8,7 +8,7 @@ class Letter {
 
   toString() {
     const letter = this._letter.toUpperCase()
-    return letter == "Q" ? "Qu" : letter
+    return letter === "Q" ? "Qu" : letter
   }
 
   toJSON() {
