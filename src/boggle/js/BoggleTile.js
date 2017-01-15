@@ -6,6 +6,7 @@ class BoggleTile extends Component {
     return (
       <div className="BoggleTile">
         {this.props.letter}
+        <div className="Value">{this.props.value}</div>
       </div>
     );
   }

@@ -27,8 +27,7 @@ export default (totalLetters)=>{
     // remove the random letter and store in a variable
     let chosenLetter = consonants.slice(random, random+1);
 
-    // special case for "Q"!
-    chosenLetter = chosenLetter === "Q" ? "Qu" : consonants[random];
+    chosenLetter = consonants[random];
     letterBag.push(chosenLetter);
   }
   return letterBag;

@@ -17,7 +17,7 @@ class BoggleGrid extends Component {
         {this.grid.map ((row, rid) =>
           <div className="row" key={rid}>
             {row.map ((tile, tid) =>
-              <BoggleTile key={tid} letter={tile.letter}/>
+              <BoggleTile key={tid} {...tile}/>
             )}
           </div>
         )}
