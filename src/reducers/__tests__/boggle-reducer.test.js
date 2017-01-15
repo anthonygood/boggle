@@ -1,18 +1,22 @@
 import boggle from "../boggle-reducer"
 
 describe("boggleReducer", () => {
+  const state = boggle()
+
   it("returns default state when state parameter is undefined", () => {
-    expect(boggle(undefined, {type: "START_SELECTING_LETTERS"})).toEqual(
-      {
-        foundWords: [],
-        score: 0,
-        selecting: true
-      }
-    )
+    expect(state.foundWords).toEqual([])
+    expect(state.score).toEqual(0)
+    expect(state.selecting).toBe(false)
+    expect(state.grid).toBeDefined()
+  })
+
+  it("updates state for the action START_SELECTING_LETTERS", () => {
+    const newState = boggle(state, {type: "START_SELECTING_LETTERS"})
+    expect(newState.selecting).toBe(true)
   })
 
   it("updates state for the action END_SELECTING_LETTERS", () => {
-    const state = boggle()
-    expect(boggle(state, {type: "END_SELECTING_LETTERS"}).selecting).toBe(false)
+    const newState = boggle(state, {type: "END_SELECTING_LETTERS"})
+    expect(newState.selecting).toBe(false)
   })
 })
