@@ -10,6 +10,9 @@ it("returns an array of array (all the same size!)", () => {
   })
 })
 
-it("sub arrays contain letters", () => {
-  expect(typeof makeGrid(2)[0][0]).toEqual("string")
+it("sub arrays contain JSON", () => {
+  const json = makeGrid(2)[0][0]
+  expect(typeof json.letter).toBe("string")
+  expect(json.value).toBeDefined()
+  expect(json.multiplier).toBeDefined()
 })

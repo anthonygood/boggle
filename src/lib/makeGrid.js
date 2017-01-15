@@ -9,6 +9,7 @@
 //
 import shuffle from "./shuffle.js"
 import pickLetters from "./pickLetters.js"
+import Letter from "./Letter.js"
 
 export default (size)=>{
 
@@ -23,7 +24,15 @@ export default (size)=>{
     grid[i] = row
 
     for(j=0; j<size; j++){
-      row[j] = letters.pop()
+
+      // TODO:
+      // Handle passing in bonus multipliers
+      const letter = new Letter(
+        letters.pop(),
+        { x: j, y: i }
+      )
+
+      row[j] = letter.toJSON()
     }
   }
 
