@@ -6,9 +6,9 @@
 // returns an array: ["A", "I", "T", "M"]
 //
 export default (totalLetters)=>{
-  const consonants = "BBCCDDDFFGGHHHHHJKLLLLMMNNNNNNPPQRRRRRSSSSSSTTTTTTTTTVVWWWXYYYZ",
-        vowels = "AAAAAEEEEEIIIOOOUU",
-        numberOfVowels = Math.ceil((totalLetters*0.5)-1);
+  const consonants = "BBCCDDDFFGGHHHHHJKLLLLMMNNNNNNNPPQRRRRRRRSSSSSSTTTTTTTTTTVVWWWXYYYZ",
+        vowels = "AAAAEEEEEEEIIIOOOUU",
+        numberOfVowels = Math.floor((totalLetters*0.4)-1);
 
   let letterBag = [];
 

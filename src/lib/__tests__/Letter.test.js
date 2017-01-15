@@ -21,6 +21,7 @@ describe("Letter", () => {
 
   it("can return a JSON representation of itself", () => {
     expect(letter.toJSON()).toEqual({
+      _id:        "00",
       letter:     "A",
       baseValue:   1,
       multiplier:  1,

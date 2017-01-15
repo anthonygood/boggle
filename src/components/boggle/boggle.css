@@ -13,10 +13,21 @@
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.1s;
+  user-select: none;
 }
 
 .BoggleTile:hover {
   transform: scale(1.1);
+}
+
+.BoggleTile.selected {
+  background-color: #F2C924;
+  color: black;
+}
+
+.BoggleTile.selected:hover {
+  background-color: #F4D24B;
+  color: rgb(100, 100, 100);
 }
 
 .BoggleTile .Value {
@@ -30,7 +41,6 @@
 
 /* Hitbox provides a reduced profile to avoid selecting the wrong tiles */
 .BoggleTile .Hitbox {
-  background-color: rgba(250, 0, 0, 0.2);
   position: absolute;
   top: 15%;
   left: 15%;

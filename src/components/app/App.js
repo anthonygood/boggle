@@ -1,40 +1,36 @@
 import React, { Component } from "react"
 import "./App.css"
+import CurrentWord from "../boggle/CurrentWord"
 import BoggleGrid from "../boggle/BoggleGrid"
-import Checker from "../../lib/Checker"
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      clicking: false
-    }
-  }
   render() {
+    console.log("render!")
+    window.app = this
     return (
       <div className="App">
-        <BoggleGrid size={4} />
+        <CurrentWord letters={ this.props.boggle.currentWord } />
+        <BoggleGrid { ...this.props.boggle } />
       </div>
     );
   }
 
   componentWillMount() {
-    document.addEventListener("mousedown", this._onMouseDown)
-    document.addEventListener("mouseup", this._onMouseUp)
+    document.addEventListener("mousedown", this._onMouseDown.bind(this))
+    document.addEventListener("mouseup",   this._onMouseUp.bind(this))
   }
 
-  componentWillUnmout() {
+  componentWillUnmount() {
     document.removeEventListener("mousedown")
     document.removeEventListener("mouseup")
   }
 
   _onMouseDown() {
-    // MOUSEDOWN
+    this.props.actions.startSelectingLetters()
   }
 
   _onMouseUp() {
-    // If there are letters in store
-    // Submit word
+    this.props.actions.endSelectingLetters()
   }
 }
 

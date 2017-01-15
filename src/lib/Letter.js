@@ -13,6 +13,7 @@ class Letter {
 
   toJSON() {
     return {
+      _id:        this._id(),
       letter:     this.toString(),
       baseValue:  this._baseValue(),
       multiplier: this._multiplier,
@@ -52,6 +53,10 @@ class Letter {
         return 10
       default: return 1
     }
+  }
+
+  _id() {
+    return "" + this._x + this._y
   }
 }
 

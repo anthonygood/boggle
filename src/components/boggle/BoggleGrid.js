@@ -1,44 +1,36 @@
 import React, { Component } from "react"
-import BoggleTile from "./BoggleTile"
-import makeGrid from "../../lib/makeGrid"
+import BoggleTile from "./connected-boggle-tile"
 
 class BoggleGrid extends Component {
   constructor(props) {
     super(props)
-
-    this.grid = makeGrid(props.size)
+    window.bg = this
   }
 
   render() {
-    window.grid = this.grid
+    const { selecting } = this.props
+
     return (
       <div className="BoggleGrid">
 
-        {this.grid.map ((row, rid) =>
+        {this.props.grid.map ((row, rid) =>
           <div className="row" key={rid}>
             {row.map ((tile, tid) =>
-              <BoggleTile key={tid} {...tile}/>
+              <BoggleTile key={tile.x} isSelected={this._isTileSelected(tile)} selecting={selecting} {...tile}/>
             )}
           </div>
         )}
 
       </div>
-    );
+    )
   }
 
-  _generateGrid(size) {
-    let grid = [],
-        row;
+  _isTileSelected(tile) {
+    const ids = this.props.currentWord.map(
+      (tile) => { return tile._id }
+    )
 
-    for(let r = 0; r < size; r++) {
-      row = []
-      for(let c = 0; c < size; c++) {
-        row.push(`${r}${c}`)
-      }
-      grid.push(row)
-    }
-
-    return grid
+    return ids.indexOf(tile._id) > -1
   }
 }
 

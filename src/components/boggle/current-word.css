@@ -1,0 +1,7 @@
+.CurrentWord {
+  min-height: 100px;
+  font-size: 100px;
+  color: white;
+  font-weight: bold;
+  user-select: none;
+}
