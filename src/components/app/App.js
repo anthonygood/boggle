@@ -1,14 +1,19 @@
-import React, { Component } from "react"
 import "./App.css"
+import React, { Component } from "react"
+import CurrentScore from "../boggle/CurrentScore"
 import CurrentWord from "../boggle/CurrentWord"
 import BoggleGrid from "../boggle/BoggleGrid"
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.props.actions.startGame()
+  }
+
   render() {
-    console.log("render!")
-    window.app = this
     return (
       <div className="App">
+        <CurrentScore score={ this.props.boggle.score } />
         <CurrentWord letters={ this.props.boggle.currentWord } />
         <BoggleGrid { ...this.props.boggle } />
       </div>

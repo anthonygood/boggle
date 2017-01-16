@@ -4,14 +4,6 @@ import Checker from "../lib/Checker"
 
 const DEFAULT_GRID_SIZE = 4
 
-// const DEFAULT_STATE = {
-//   currentWord: [],
-//   foundWords: [],
-//   grid: makeGrid(DEFAULT_GRID_SIZE),
-//   score: 0,
-//   selecting: false
-// }
-
 const DEFAULT_STATE = {
   gamePhase: "notStarted",
   currentWord: [],
