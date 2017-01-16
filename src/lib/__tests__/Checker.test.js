@@ -8,4 +8,8 @@ describe("Checker", () => {
   it("returns false for words not in dictionary", () => {
     expect(Checker.check("testx")).toBe(false)
   })
+
+  it("returns false for partial words", () => {
+    expect(Checker.check("gh")).toBe(false)
+  })
 })

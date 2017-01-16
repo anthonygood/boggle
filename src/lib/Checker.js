@@ -5,7 +5,8 @@ import DICTIONARY from "./dictionary.js"
 
 class Checker {
   static check(word) {
-    return DICTIONARY.indexOf(word) > -1
+    const wholeWord = " " + word.toLowerCase() + " "
+    return DICTIONARY.indexOf(wholeWord) > -1
   }
 }
 
