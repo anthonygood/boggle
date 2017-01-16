@@ -14,14 +14,34 @@ describe("boggleReducer", () => {
 
   describe("START_SELECTING_LETTERS", () => {
     it("updates state for the action START_SELECTING_LETTERS", () => {
-      const newState = boggle(state, {type: "START_SELECTING_LETTERS"})
+      const newState = boggle(state, { type: "START_SELECTING_LETTERS" })
       expect(newState.selecting).toBe(true)
     })
   })
 
-  describe("END_SELECTING_LETTERS", () => {
+  describe("SUBMIT_CORRECT_WORD", () => {
+    const selecting   = true
+    const currentWord = [{letter: "C", value: 100},{letter: "A", value: 20},{letter: "T", value: 3}]
+
+    const someState = Object.assign({}, state, { currentWord, selecting })
+    const newState  = boggle(someState, { type: "SUBMIT_CORRECT_WORD" })
+
+    it("adds word to foundWords", () => {
+      expect(newState.foundWords).toEqual([currentWord]) // 2D array
+    })
+
+    it("adds word value to score", () => {
+      expect(newState.score).toBe(123)
+    })
+
+    it("changes selecting to false", () => {
+      expect(newState.selecting).toBe(false)
+    })
+  })
+
+  describe("SUBMIT_INCORRECT_WORD", () => {
     it("updates state for the action END_SELECTING_LETTERS", () => {
-      const newState = boggle(state, {type: "END_SELECTING_LETTERS"})
+      const newState = boggle(state, { type: "END_SELECTING_LETTERS" })
       expect(newState.selecting).toBe(false)
     })
   })

@@ -13,30 +13,6 @@ const DEFAULT_STATE = {
   selecting: false
 }
 
-const submitWord = (state, word) => {
-  // Check that word is correct
-  const currentWord = state.currentWord.map(
-    (letter) => { return letter.letter }
-  ).join("").toLowerCase()
-
-  const isCorrect = Checker.check(currentWord)
-
-  if(isCorrect) {
-    // Calculate word's value
-    const wordValue = state.currentWord.reduce((a, b) => { return a + b.value }, 0)
-    const score  = state.score + wordValue
-
-    // Add word to foundWords
-    const foundWords = state.foundWords + state.currentWord
-
-    // Compose new state
-    return Object.assign({}, state, { foundWords, score, wordValue, currentWord: [], selecting: false })
-  } else {
-    // Just reset currentWord
-    return Object.assign({}, state, { currentWord: [], selecting: false })
-  }
-}
-
 export default (state = DEFAULT_STATE, action = {}) => {
   switch (action.type) {
     case TYPES.START_GAME:
@@ -48,8 +24,17 @@ export default (state = DEFAULT_STATE, action = {}) => {
     case TYPES.START_SELECTING_LETTERS:
       return Object.assign({}, state, { selecting: true })
 
-    case TYPES.END_SELECTING_LETTERS:
-      return submitWord(state)
+    case TYPES.SUBMIT_CORRECT_WORD:
+      // word == [{letter},{letter}]
+      const word  = state.currentWord
+      const score = state.score + word.reduce((a,b) => { return a + b.value }, 0)
+      const foundWords = [ ...state.foundWords, word ]
+      return Object.assign({}, state, { foundWords, score, currentWord: [], selecting: false })
+
+    case TYPES.SUBMIT_INCORRECT_WORD:
+      // TODO:
+      // Keep a count of all words submitted?
+      return Object.assign({}, state, { currentWord: [], selecting: false })
 
     case TYPES.ADD_LETTER:
       const newWord = [ ...state.currentWord, Object.assign({}, action.letter) ]

@@ -1,5 +1,6 @@
 export const START_GAME              = "START_GAME"
 export const START_SELECTING_LETTERS = "START_SELECTING_LETTERS"
 export const ADD_LETTER              = "ADD_LETTER"
-export const END_SELECTING_LETTERS   = "END_SELECTING_LETTERS"
+export const SUBMIT_CORRECT_WORD     = "SUBMIT_CORRECT_WORD"
+export const SUBMIT_INCORRECT_WORD   = "SUBMIT_INCORRECT_WORD"
 export const END_GAME                = "END_GAME"
