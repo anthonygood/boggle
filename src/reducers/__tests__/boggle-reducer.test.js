@@ -6,7 +6,7 @@ describe("boggleReducer", () => {
   it("returns default state when state parameter is undefined", () => {
     expect(state.gamePhase).toBe("notStarted")
     expect(state.currentWord).toEqual([])
-    expect(state.foundWords).toEqual([])
+    expect(state.foundWords).toEqual({})
     expect(state.grid).toEqual([])
     expect(state.score).toEqual(0)
     expect(state.selecting).toBe(false)
@@ -24,10 +24,10 @@ describe("boggleReducer", () => {
     const currentWord = [{letter: "C", value: 100},{letter: "A", value: 20},{letter: "T", value: 3}]
 
     const someState = Object.assign({}, state, { currentWord, selecting })
-    const newState  = boggle(someState, { type: "SUBMIT_CORRECT_WORD" })
+    const newState  = boggle(someState, { type: "SUBMIT_CORRECT_WORD", word: "cat" })
 
     it("adds word to foundWords", () => {
-      expect(newState.foundWords).toEqual([currentWord]) // 2D array
+      expect(newState.foundWords).toEqual({cat: currentWord}) // 2D array
     })
 
     it("adds word value to score", () => {

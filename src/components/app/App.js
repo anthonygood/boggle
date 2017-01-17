@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   _onMouseUp() {
-    this.props.actions.submitWord(this.props.boggle.currentWord)
+    this.props.actions.submitWord()
   }
 }
 

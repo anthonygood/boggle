@@ -12,7 +12,6 @@ class BoggleGrid extends Component {
 
     return (
       <div className="BoggleGrid">
-
         {this.props.grid.map ((row, rid) =>
           <div className="row" key={rid}>
             {row.map ((tile, tid) =>

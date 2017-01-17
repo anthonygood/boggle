@@ -31,19 +31,8 @@ const addLetter = (letter) => {
   }
 }
 
-// submitWord will dispatch either SUBMIT_CORRECT_WORD or SUBMIT_INCORRECT_WORD
-// according to the correctness of state.currentWord
 const submitWord = (word) => {
-  // Check that word is correct
-  const currentWord = word.map(
-    (letter) => { return letter.letter }
-  ).join("").toLowerCase()
-
-  if(Checker.check(currentWord)) {
-    return { type: TYPES.SUBMIT_CORRECT_WORD }
-  } else {
-    return { type: TYPES.SUBMIT_INCORRECT_WORD }
-  }
+  return { type: TYPES.SUBMIT_WORD }
 }
 
 export default {
