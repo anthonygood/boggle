@@ -4,9 +4,7 @@ import { bindActionCreators } from "redux"
 import boggleActions from "../../actions/boggle-actions"
 
 const mapStateToProps = (state, props) => {
-  return {
-    boggle: state.boggle
-  }
+  return state.boggle
 }
 
 const mapDispatchToProps = (dispatch) => {

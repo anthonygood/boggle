@@ -7,15 +7,16 @@ import BoggleGrid from "../boggle/BoggleGrid"
 class App extends Component {
   constructor(props) {
     super(props)
+    window.app = this
     this.props.actions.startGame()
   }
 
   render() {
     return (
       <div className="App">
-        <CurrentScore score={ this.props.boggle.score } />
-        <CurrentWord letters={ this.props.boggle.currentWord } />
-        <BoggleGrid { ...this.props.boggle } />
+        <CurrentScore score={ this.props.score } />
+        <CurrentWord letters={ this.props.currentWord } />
+        <BoggleGrid { ...this.props } />
       </div>
     );
   }

@@ -1,8 +1,6 @@
 import * as TYPES from "../actions/action-types"
 import onSubmitWord from "./onSubmitWord"
 
-const DEFAULT_GRID_SIZE = 4
-
 const DEFAULT_STATE = {
   gamePhase: "notStarted",
   currentWord: [],

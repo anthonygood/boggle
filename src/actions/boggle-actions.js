@@ -1,6 +1,5 @@
 import * as TYPES from "./action-types"
 import makeGrid from "../lib/makeGrid"
-import Checker from "../lib/Checker"
 
 const GRID_SIZE = 4
 

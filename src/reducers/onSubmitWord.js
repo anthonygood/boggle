@@ -1,15 +1,5 @@
 import Checker from "../lib/Checker"
 
-const onSubmitWord = (state, currentWordAsString) => {
-  // TODO:
-  // Specific UI response for submitting previously found word
-  if(Checker.check(currentWordAsString) && _wordNotYetFound(state, currentWordAsString)) {
-    return _handleCorrectWord(state, currentWordAsString)
-  } else {
-    return _handleIncorrectWord(state, currentWordAsString)
-  }
-}
-
 const _wordNotYetFound = (state, currentWordAsString) => {
   return !state.foundWords.hasOwnProperty(currentWordAsString)
 }
@@ -31,6 +21,16 @@ const _handleIncorrectWord = (state) => {
   // TODO:
   // Keep a count of all words submitted?
   return Object.assign({}, state, { currentWord: [], selecting: false })
+}
+
+const onSubmitWord = (state, currentWordAsString) => {
+  // TODO:
+  // Specific UI response for submitting previously found word
+  if(Checker.check(currentWordAsString) && _wordNotYetFound(state, currentWordAsString)) {
+    return _handleCorrectWord(state, currentWordAsString)
+  } else {
+    return _handleIncorrectWord(state, currentWordAsString)
+  }
 }
 
 export default onSubmitWord
