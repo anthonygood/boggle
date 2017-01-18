@@ -40,7 +40,7 @@ describe("boggleReducer", () => {
       })
 
       it("updates lastSubmittedWord", () => {
-        expect(newState.lastSubmittedWord).toEqual({ word: currentWord, status: "correct" })
+        expect(newState.lastSubmittedWord).toEqual({ letters: currentWord, status: "correct" })
       })
     })
 
@@ -54,7 +54,7 @@ describe("boggleReducer", () => {
       })
 
       it("updates lastSubmittedWord", () => {
-        expect(newState.lastSubmittedWord).toEqual({ word: currentWord, status: "incorrect" })
+        expect(newState.lastSubmittedWord).toEqual({ letters: currentWord, status: "incorrect" })
       })
     })
   })

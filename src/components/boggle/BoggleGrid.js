@@ -2,11 +2,6 @@ import React, { Component } from "react"
 import BoggleTile from "./connected-boggle-tile"
 
 class BoggleGrid extends Component {
-  constructor(props) {
-    super(props)
-    window.bg = this
-  }
-
   render() {
     const { selecting } = this.props
 

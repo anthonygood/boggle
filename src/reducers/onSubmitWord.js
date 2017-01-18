@@ -14,19 +14,19 @@ const _handleCorrectWord = (state, currentWordAsString) => {
   wordObj[currentWordAsString] = word
 
   const foundWords = Object.assign({}, state.foundWords, wordObj)
-  const lastSubmittedWord = { word: state.currentWord, status: "correct" }
+  const lastSubmittedWord = { letters: state.currentWord, status: "correct" }
   return Object.assign({}, state, { foundWords, score, lastSubmittedWord, currentWord: [], selecting: false })
 }
 
 const _handleIncorrectWord = (state, currentWordAsString) => {
   // TODO:
   // Keep a count of all words submitted?
-  const lastSubmittedWord = { word: state.currentWord, status: "incorrect" }
+  const lastSubmittedWord = { letters: state.currentWord, status: "incorrect" }
   return Object.assign({}, state, { lastSubmittedWord, currentWord: [], selecting: false })
 }
 
 const _handleDuplicateWord = (state, currentWordAsString) => {
-  const lastSubmittedWord = { word: state.currentWord, status: "duplicate" }
+  const lastSubmittedWord = { letters: state.currentWord, status: "duplicate" }
   return Object.assign({}, state, { lastSubmittedWord, currentWord: [], selecting: false })
 }
 

@@ -1,7 +1,19 @@
-.CurrentWord {
-  min-height: 120px;
-  font-size: 100px;
+.CurrentWord, .PreviousWord {
+  min-height: 100px;
+  font-size: 85px;
   color: white;
   font-weight: bold;
   user-select: none;
+}
+
+.PreviousWord.correct {
+  color: #ffbe1f;
+}
+
+.PreviousWord.incorrect {
+  color: #dc4019;
+}
+
+.PreviousWord.duplicate {
+  color: #f0811b;
 }

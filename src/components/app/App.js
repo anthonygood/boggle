@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <div className="App">
         <CurrentScore score={ this.props.score } />
-        <CurrentWord letters={ this.props.currentWord } />
+        <CurrentWord letters={ this.props.currentWord } lastSubmittedWord={ this.props.lastSubmittedWord } />
         <BoggleGrid { ...this.props } />
       </div>
     );
