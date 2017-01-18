@@ -4,6 +4,7 @@ import onSubmitWord from "./onSubmitWord"
 const DEFAULT_STATE = {
   gamePhase: "notStarted",
   currentWord: [],
+  lastSubmittedWord: null,
   foundWords: {},
   grid: [],
   score: 0,

@@ -19,31 +19,47 @@ describe("boggleReducer", () => {
     })
   })
 
-  describe("SUBMIT_CORRECT_WORD", () => {
-    const selecting   = true
-    const currentWord = [{letter: "C", value: 100},{letter: "A", value: 20},{letter: "T", value: 3}]
+  describe("SUBMIT_WORD", () => {
+    context("correct", () => {
+      const selecting   = true
+      const currentWord = [{letter: "C", value: 100},{letter: "A", value: 20},{letter: "T", value: 3}]
 
-    const someState = Object.assign({}, state, { currentWord, selecting })
-    const newState  = boggle(someState, { type: "SUBMIT_CORRECT_WORD", word: "cat" })
+      const someState = Object.assign({}, state, { currentWord, selecting })
+      const newState  = boggle(someState, { type: "SUBMIT_WORD", word: "cat" })
 
-    it("adds word to foundWords", () => {
-      expect(newState.foundWords).toEqual({cat: currentWord}) // 2D array
+      it("adds word to foundWords", () => {
+        expect(newState.foundWords).toEqual({cat: currentWord}) // 2D array
+      })
+
+      it("adds word value to score", () => {
+        expect(newState.score).toBe(123)
+      })
+
+      it("cancels selecting tiles", () => {
+        expect(newState.selecting).toBe(false)
+      })
+
+      it("updates lastSubmittedWord", () => {
+        expect(newState.lastSubmittedWord).toEqual({ word: currentWord, status: "correct" })
+      })
     })
 
-    it("adds word value to score", () => {
-      expect(newState.score).toBe(123)
-    })
+    context("incorrect", () => {
+      const currentWord = [{letter: "X"},{letter: "X"}]
+      const someState = Object.assign({}, state, { currentWord })
+      const newState = boggle(someState, { type: "SUBMIT_WORD" })
 
-    it("changes selecting to false", () => {
-      expect(newState.selecting).toBe(false)
+      it("cancels selecting tiles", () => {
+        expect(newState.selecting).toBe(false)
+      })
+
+      it("updates lastSubmittedWord", () => {
+        expect(newState.lastSubmittedWord).toEqual({ word: currentWord, status: "incorrect" })
+      })
     })
   })
 
   describe("SUBMIT_INCORRECT_WORD", () => {
-    it("updates state for the action END_SELECTING_LETTERS", () => {
-      const newState = boggle(state, { type: "END_SELECTING_LETTERS" })
-      expect(newState.selecting).toBe(false)
-    })
   })
 
   describe("START_GAME", () => {

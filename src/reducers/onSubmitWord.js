@@ -1,7 +1,7 @@
 import Checker from "../lib/Checker"
 
-const _wordNotYetFound = (state, currentWordAsString) => {
-  return !state.foundWords.hasOwnProperty(currentWordAsString)
+const _wordAlreadyFound = (state, currentWordAsString) => {
+  return state.foundWords.hasOwnProperty(currentWordAsString)
 }
 
 const _handleCorrectWord = (state, currentWordAsString) => {
@@ -14,23 +14,26 @@ const _handleCorrectWord = (state, currentWordAsString) => {
   wordObj[currentWordAsString] = word
 
   const foundWords = Object.assign({}, state.foundWords, wordObj)
-  return Object.assign({}, state, { foundWords, score, currentWord: [], selecting: false })
+  const lastSubmittedWord = { word: state.currentWord, status: "correct" }
+  return Object.assign({}, state, { foundWords, score, lastSubmittedWord, currentWord: [], selecting: false })
 }
 
-const _handleIncorrectWord = (state) => {
+const _handleIncorrectWord = (state, currentWordAsString) => {
   // TODO:
   // Keep a count of all words submitted?
-  return Object.assign({}, state, { currentWord: [], selecting: false })
+  const lastSubmittedWord = { word: state.currentWord, status: "incorrect" }
+  return Object.assign({}, state, { lastSubmittedWord, currentWord: [], selecting: false })
+}
+
+const _handleDuplicateWord = (state, currentWordAsString) => {
+  const lastSubmittedWord = { word: state.currentWord, status: "duplicate" }
+  return Object.assign({}, state, { lastSubmittedWord, currentWord: [], selecting: false })
 }
 
 const onSubmitWord = (state, currentWordAsString) => {
-  // TODO:
-  // Specific UI response for submitting previously found word
-  if(Checker.check(currentWordAsString) && _wordNotYetFound(state, currentWordAsString)) {
-    return _handleCorrectWord(state, currentWordAsString)
-  } else {
-    return _handleIncorrectWord(state, currentWordAsString)
-  }
+  if (_wordAlreadyFound(state, currentWordAsString)) { return _handleDuplicateWord(state, currentWordAsString) }
+  else if (Checker.check(currentWordAsString))       { return _handleCorrectWord(state, currentWordAsString)   }
+  else                                               { return _handleIncorrectWord(state, currentWordAsString) }
 }
 
 export default onSubmitWord
