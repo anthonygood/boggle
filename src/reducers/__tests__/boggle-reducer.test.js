@@ -59,9 +59,6 @@ describe("boggleReducer", () => {
     })
   })
 
-  describe("SUBMIT_INCORRECT_WORD", () => {
-  })
-
   describe("START_GAME", () => {
     const grid = ["someGrid"]
     const newState = boggle(state, { type: "START_GAME", grid })
@@ -85,11 +82,9 @@ describe("boggleReducer", () => {
 
   describe("ADD_LETTER", () => {
     const newState = boggle(
-      state,
-      {
+      state, {
         type: "ADD_LETTER",
-        letter:
-          {
+        letter: {
             letter: "X",
             baseValue: 1,
             multiplier: 5,
@@ -97,20 +92,37 @@ describe("boggleReducer", () => {
             y: 2,
             value: 5
           }
-      }
+        }
     )
 
     it("adds letter to currentWord", () => {
-      expect(newState.currentWord).toEqual([
-        {
-          letter: "X",
+      expect(newState.currentWord).toEqual([{
+        letter: "X",
+        baseValue: 1,
+        multiplier: 5,
+        x: 1,
+        y: 2,
+        value: 5
+      }])
+    })
+
+    context("invalid next letter (non-adjacent tile)", () => {
+      const furtherState = boggle(newState, {
+        type: "ADD_LETTER",
+        letter: {
+          letter: "Y",
           baseValue: 1,
           multiplier: 5,
-          x: 1,
+          x: 3,
           y: 2,
           value: 5
         }
-      ])
+      }
+    )
+
+      it("doesn't add letter", () => {
+        expect(furtherState.currentWord.length).toBe(1)
+      })
     })
   })
 })

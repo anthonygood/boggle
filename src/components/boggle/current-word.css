@@ -4,14 +4,26 @@
   color: white;
   font-weight: bold;
   user-select: none;
+  text-shadow: 0 0 0 white;
+}
+
+.PreviousWord {
+  transition: 0.25s;
 }
 
 .PreviousWord.correct {
-  color: #ffbe1f;
+  /*transform: scale(1.2);*/
+  color: #ffc81f;
+  text-shadow: 2px 5px 15px #fa6800;
+}
+
+.PreviousWord.correct.high-beam {
+  color: ;
 }
 
 .PreviousWord.incorrect {
   color: #dc4019;
+  text-shadow: none;
 }
 
 .PreviousWord.duplicate {

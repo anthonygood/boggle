@@ -14,10 +14,12 @@
   cursor: pointer;
   transition: transform 0.1s;
   user-select: none;
+  box-shadow: 2px 5px 15px #fa6800;
 }
 
 .BoggleTile:hover {
   transform: scale(1.1);
+  box-shadow: 4px 10px 25px #fa6800;
 }
 
 .BoggleTile.selected {
@@ -25,9 +27,10 @@
   color: black;
 }
 
-.BoggleTile.selected:hover {
+.BoggleTile.selected.lastSelected {
   background-color: #F4D24B;
   color: rgb(100, 100, 100);
+  transform: scale(1.1);
 }
 
 .BoggleTile .Value {

@@ -15,12 +15,12 @@ class BoggleTile extends Component {
   _className() {
     let className = "BoggleTile"
     className += this.props.isSelected ? " selected" : ""
+    className += this.props.isLastSelected ? " lastSelected" : ""
     return className
   }
 
   _select() {
-    window.tile = this
-    this.props.actions.addLetter(this.props)
+    if(!this.props.isSelected) { this.props.actions.addLetter(this.props) }
   }
 
   _onMouseOver() {
@@ -29,11 +29,6 @@ class BoggleTile extends Component {
     if(this.props.selecting) {
       this._select()
     }
-  }
-
-  // Method to check if the current tile has already been selected for the current word
-  _isSelected() {
-
   }
 }
 
