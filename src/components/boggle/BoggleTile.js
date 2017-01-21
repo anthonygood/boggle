@@ -47,7 +47,7 @@ class BoggleLine extends Component {
 
   _indexInCurrentWord() {
     return this.props.currentWord.findIndex(
-      (letter) => { return letter._id == this.props._id }
+      (letter) => { return letter._id === this.props._id }
     )
   }
   _previousLetter(index) {
