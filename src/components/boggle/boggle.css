@@ -1,8 +1,12 @@
 .BoggleGrid {}
 
-.BoggleTile {
+.BoggleTileContainer {
   position: relative;
   display: inline-block;
+}
+
+.BoggleTile {
+  position: relative;
   width: 100px;
   height: 100px;
   margin: 5px;
@@ -14,7 +18,7 @@
   cursor: pointer;
   transition: transform 0.1s;
   user-select: none;
-  box-shadow: 2px 5px 15px #fa6800;
+  box-shadow: 6px 6px 0 #fa6800;
 }
 
 .BoggleTile:hover {
@@ -24,12 +28,13 @@
 
 .BoggleTile.selected {
   background-color: #F2C924;
-  color: black;
+  color: rgb(100, 100, 100);
+  box-shadow: none;
 }
 
 .BoggleTile.selected.lastSelected {
-  background-color: #F4D24B;
-  color: rgb(100, 100, 100);
+  background-color: #ffe612;
+  color: black;
   transform: scale(1.1);
 }
 

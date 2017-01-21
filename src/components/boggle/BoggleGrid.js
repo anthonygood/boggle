@@ -15,6 +15,7 @@ class BoggleGrid extends Component {
                           isSelected={this._isTileSelected(tile, letterIds)}
                           isLastSelected={this._isLastSelected(tile, letterIds)}
                           selecting={selecting}
+                          currentWord={this.props.currentWord}
                           {...tile} />
             )}
           </div>
