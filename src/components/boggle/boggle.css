@@ -1,19 +1,25 @@
-.BoggleGrid {}
+.BoggleGrid {
+  position: relative;
+  margin: auto;
+  width: 60vh;
+  height: 60vh;
+}
 
 .BoggleTileContainer {
   position: relative;
   display: inline-block;
+  width: 15vh;
+  height: 15vh;
 }
 
 .BoggleTile {
+  height: 13.5vh;
+  width: 13.5vh;
   position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 5px;
   background-color: white;
   color: rgb(100, 100, 100);
-  font-size: 68px;
-  line-height: 100px;
+  line-height: 14vh;
+  font-size: 9vh;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.1s;
@@ -27,6 +33,7 @@
 }
 
 .BoggleTile.selected {
+  z-index: 2;
   background-color: #F2C924;
   color: rgb(100, 100, 100);
   box-shadow: none;
