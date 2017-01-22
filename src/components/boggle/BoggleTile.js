@@ -6,7 +6,7 @@ class BoggleTile extends Component {
   render() {
     return (
       <div className="BoggleTileContainer">
-        <div className={this._className()}>
+        <div className={this._className()} data-id={this.props._id}>
           {this.props.letter}
           <div className="Value">{this.props.value}</div>
           <div className="Hitbox" onMouseDown={this._select.bind(this)} onMouseOver={this._onMouseOver.bind(this)}></div>
@@ -18,9 +18,9 @@ class BoggleTile extends Component {
 
   _className() {
     let className = "BoggleTile"
-    className += this.props.isSelected ? " selected" : ""
+    className += this.props.isSelected || this.props.isSelectedKeyboard ? " selected" : ""
     className += this.props.isLastSelected || this.props.isLastSelectedKeyboard ? " lastSelected" : ""
-    className += this.props.isSelectedKeyboard ? " selected-keyboard" : ""
+    className += this.props.isSelectedKeyboard ? " keyboard" : ""
     return className
   }
 

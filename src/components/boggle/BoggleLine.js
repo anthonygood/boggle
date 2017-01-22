@@ -3,19 +3,22 @@ import "./Line.css"
 
 class BoggleLine extends Component {
   render() {
-    const index = this._indexInCurrentWord()
-    if(index < 1) { return null }
-
-    const prevLetter = this._previousLetter(index)
-    const className = this._className(prevLetter)
+    // In the case of keyboard input, there may be multiple paths/previous letters
+    const prevLetters = this._previousLetters()
 
     return (
-      <div className={className}></div>
+      <div className="LineContainer">
+        { prevLetters.map((letter, i) =>
+          <div key={i} className={this._className(letter)}></div>
+        )}
+      </div>
     )
   }
 
   _className(prevLetter) {
-    return "Line " + this._compassPoint(prevLetter)
+    let className = "Line " + this._compassPoint(prevLetter)
+    className += this.props.pathsForKeyboard.length ? " keyboard" : ""
+    return className
   }
 
   // Returns CSS class (n, s, e, w, se, etc.)
@@ -44,14 +47,28 @@ class BoggleLine extends Component {
     return points[key]
   }
 
-  _indexInCurrentWord() {
-    return this.props.pathForMouse.findIndex(
-      (letter) => { return letter._id === this.props._id }
-    )
+  _activePaths() {
+    if(this.props.pathForMouse.length) {
+      return [this.props.pathForMouse]
+    } else {
+      return this.props.pathsForKeyboard
+    }
   }
 
-  _previousLetter(index) {
-    return this.props.pathForMouse[index - 1]
+  // Letter won't necessarily have the same index in all paths,
+  // especially where the same letter occurs twice in a word.
+  // eg. "HO[O]P" versus "H[O]OP"
+  _previousLetters() {
+    return this._activePaths().map((path) => {
+
+      // Find this letter's index in path
+      const index = path.findIndex((letter) => { return letter._id === this.props._id })
+
+      // Skip if the letter isn't in this path
+      if(!index) { return }
+
+      return path[index-1]
+    }).filter((letter) => { return typeof letter !== "undefined" })
   }
 }
 

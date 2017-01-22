@@ -45,8 +45,12 @@
   transform: scale(1.1);
 }
 
-.BoggleTile.selected-keyboard {
+.BoggleTile.selected.keyboard {
   background-color: #52ffe0;
+}
+
+.BoggleTile.selected.lastSelected.keyboard {
+  background-color: #00ffbb;
 }
 
 .BoggleTile.selected-keyboard.lastSelected {

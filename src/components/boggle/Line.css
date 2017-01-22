@@ -8,7 +8,11 @@
   margin-left: -10px;
 }
 
-.Line.n {
+.Line.keyboard  {
+  border-color: #b2ffe9;
+}
+
+.n {
   left: 50%;
   transform: translate(0,-30%);
   border-left: 20px solid #ffc81f;
