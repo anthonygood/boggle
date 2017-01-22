@@ -45,6 +45,16 @@
   transform: scale(1.1);
 }
 
+.BoggleTile.selected-keyboard {
+  background-color: #52ffe0;
+}
+
+.BoggleTile.selected-keyboard.lastSelected {
+  background-color: #8dfff0;
+  color: black;
+  transform: scale(1.1);
+}
+
 .BoggleTile .Value {
   font-size: 16px;
   line-height: 16px;

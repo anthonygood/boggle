@@ -1,27 +1,32 @@
 import * as TYPES from "../actions/action-types"
 import onSubmitWord from "./onSubmitWord"
+import onKeyboardAddLetter from "./onKeyboardAddLetter"
 import areAdjacent from "../lib/areAdjacent"
 
 const DEFAULT_STATE = {
   gamePhase: "notStarted",
-  currentWord: [],
-  lastSubmittedWord: null,
   foundWords: {},
   grid: [],
   score: 0,
-  selecting: false
+  selecting: false,
+  // Words are built up from paths through the grid,
+  // either from mouse or keyboard
+  pathForMouse: [],
+  pathsForKeyboard: [],
+  // The last submitted word is represented as an object:
+  // { letter: [{a}{b}], status: 'incorrect', asString: 'ab'}
+  lastSubmittedWord: null,
 }
 
 const onSubmitLetter = (state, letter) => {
-  const lastLetter = state.currentWord[state.currentWord.length-1]
+  const lastLetter = state.pathForMouse[state.pathForMouse.length-1]
 
   if(areAdjacent(letter, lastLetter)) {
-    const newWord = [ ...state.currentWord, Object.assign({}, letter) ]
-    return Object.assign({}, state, {currentWord: newWord})
+    const newWord = [ ...state.pathForMouse, Object.assign({}, letter) ]
+    return Object.assign({}, state, { pathForMouse: newWord })
   } else {
     return state
   }
-
 }
 
 export default (state = DEFAULT_STATE, action = {}) => {
@@ -36,11 +41,20 @@ export default (state = DEFAULT_STATE, action = {}) => {
       return Object.assign({}, state, { selecting: true })
 
     case TYPES.SUBMIT_WORD:
-      const currentWordAsString = state.currentWord.map((letter) => { return letter.letter }).join("").toLowerCase()
-      return onSubmitWord(state, currentWordAsString)
+      // TODO:
+      // Account for different keyboard paths
+      const bestPath = state.pathForMouse.length ? state.pathForMouse : state.pathsForKeyboard[0]
+
+      if(!bestPath) { return Object.assign({}, state, { selecting: false }) }
+
+      const currentWordAsString = bestPath.map((letter) => { return letter.letter }).join("").toLowerCase()
+      return onSubmitWord(state, currentWordAsString, bestPath)
 
     case TYPES.ADD_LETTER:
       return onSubmitLetter(state, action.letter)
+
+    case TYPES.ADD_LETTER_KEYBOARD:
+      return onKeyboardAddLetter(state, action.letter)
 
     default:
       return state
