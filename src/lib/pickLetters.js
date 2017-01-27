@@ -5,30 +5,39 @@
 //
 // returns an array: ["A", "I", "T", "M"]
 //
-export default (totalLetters)=>{
-  const consonants     = "BBCCDDDDFFGGHHHHHJKLLLLMMNNNNNNNPPQRRRRRRRSSSSSSTTTTTTTTTTVVWWWXYYYZ",
-        vowels         = "AAAAEEEEEEEIIIOOOUU",
-        numberOfVowels = Math.floor((totalLetters*0.4)-1)
+
+const rand = (max) => {
+  return Math.floor(
+    Math.random() * max
+  )
+}
+
+export default (totalLetters) => {
+  let   consonants     = "BBCCCCDDDDFFGGGHHHHHJKKLLLLLMMMNNNNNNNNPPQRRRRRRRRRSSSSSSSTTTTTTTTTTVVWWWXYYYZ".split(""),
+        vowels         = "AAAAEEEEEEEIIIOOOUU".split("")
+  const numberOfVowels = Math.floor(
+    ( totalLetters * 0.4 ) - 1
+  )
 
   let letterBag = []
 
   // put some vowels into our letterBag
   while(letterBag.length <= numberOfVowels){
-    const random = Math.floor(Math.random() * vowels.length)
+    const random = rand(vowels.length)
+
     letterBag.push(
-      vowels.slice(random, random+1)
-    );
+      // vowels.slice(random, random+1)
+      vowels.splice(random, 1).toString()
+    )
   }
 
   // fill up the letterBag with the consonants
   while(letterBag.length < totalLetters){
-    const random = Math.floor(Math.random() * consonants.length)
+    const random = rand(consonants.length)
 
-    // remove the random letter and store in a variable
-    let chosenLetter = consonants.slice(random, random+1)
-
-    chosenLetter = consonants[random]
-    letterBag.push(chosenLetter)
+    letterBag.push(
+     consonants.splice(random, 1).toString()
+    )
   }
   return letterBag
 }

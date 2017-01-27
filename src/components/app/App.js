@@ -1,56 +1,51 @@
 import "./App.css"
 import React, { Component } from "react"
-import CurrentScore from "../boggle/CurrentScore"
-import CurrentWord from "../boggle/CurrentWord"
-import BoggleGrid from "../boggle/BoggleGrid"
+import Splash from "../splash/Splash"
+import Game from "../boggle/connected-game"
 
 class App extends Component {
   constructor(props) {
     super(props)
-
     this.props.actions.startGame()
-    window.app = this
   }
 
   render() {
     return (
       <div className="App">
-        <CurrentScore score={ this.props.score } />
-        <CurrentWord
-          pathForMouse={ this.props.pathForMouse }
-          pathsForKeyboard={ this.props.pathsForKeyboard }
-          lastSubmittedWord={ this.props.lastSubmittedWord } />
-        <BoggleGrid { ...this.props } />
+        { this._innerContent(this.props.boggle.gamePhase) }
       </div>
-    );
+    )
   }
 
-  componentWillMount() {
-    document.addEventListener("mousedown", this._onMouseDown.bind(this))
-    document.addEventListener("mouseup",   this._onMouseUp.bind(this))
-    document.addEventListener("keydown",   this._onKeyDown.bind(this))
+  start() {
+    console.log("start!")
+    this.props.actions.startGame()
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("mouseup")
-    document.removeEventListener("mousedown")
-    document.removeEventListener("keydown")
-  }
-
-  _onMouseDown() {
-    // Prevent mouse selection if current keyboard paths are present
-    if(!this.props.pathsForKeyboard.length) {
-      this.props.actions.startSelectingLetters()
+  _innerContent(gamePhase) {
+    switch(gamePhase) {
+      case "started":
+        return this._game()
+      case "finished":
+        return this._review()
+      default:
+        return this._splash()
     }
   }
 
-  _onMouseUp() {
-    this.props.actions.submitWord()
+  _splash() {
+    return <Splash startGame={ this.start.bind(this) } { ...this.props.boggle } />
   }
 
-  _onKeyDown(event) {
-    this.props.actions.keyPress(event.key)
+  _game() {
+    return <Game { ...this.props.boggle } />
+  }
+
+  _review() {
+    return (
+      <div className="Review">Over</div>
+    )
   }
 }
 
-export default App;
+export default App

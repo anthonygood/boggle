@@ -31,6 +31,8 @@ const onSubmitLetter = (state, letter) => {
 
 export default (state = DEFAULT_STATE, action = {}) => {
   switch (action.type) {
+    // TODO:
+    // Separate reducer for gamePhase.
     case TYPES.START_GAME:
       return Object.assign({}, state, { gamePhase: "started", grid: action.grid })
 
@@ -42,7 +44,7 @@ export default (state = DEFAULT_STATE, action = {}) => {
 
     case TYPES.SUBMIT_WORD:
       // TODO:
-      // Account for different keyboard paths
+      // Account for different keyboard paths, with different multipliers.
       const bestPath = state.pathForMouse.length ? state.pathForMouse : state.pathsForKeyboard[0]
 
       if(!bestPath) { return Object.assign({}, state, { selecting: false }) }

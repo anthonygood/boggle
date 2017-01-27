@@ -51,7 +51,7 @@ const onKeyboardAddLetter = (state, letter) => {
   if(paths.length && !newPaths.length) {
     // state, currentWordAsString, bestPath
     const currentWordAsString = paths[0].reduce((word, letter) => { return word + letter.letter }, "")
-    return onSubmitWord(state, currentWordAsString, paths[0])
+    return onSubmitWord(state, currentWordAsString.toLowerCase(), paths[0])
   }
   return Object.assign({}, state, { pathsForKeyboard: newPaths })
 }

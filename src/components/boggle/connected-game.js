@@ -1,11 +1,7 @@
-import App from "./App"
+import Game from "./Game"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import boggleActions from "../../actions/boggle-actions"
-
-const mapStateToProps = (state, props) => {
-  return state
-}
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -14,5 +10,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
-)(App)
+  null,
+  mapDispatchToProps
+)(Game)
