@@ -9,22 +9,32 @@ class BoggleTile extends Component {
         <div className={this._className()} data-id={this.props._id}>
           {this.props.letter}
           <div className="Value">{this.props.value}</div>
-          <div className="Hitbox" onMouseDown={this._select.bind(this)} onMouseOver={this._onMouseOver.bind(this)}></div>
+          <div className="Hitbox"
+               data-id={this.props._id}
+               onMouseDown={this._select.bind(this)}
+               onMouseOver={this._onMouseOver.bind(this)}
+               onTouchStart={this._onTouchStart.bind(this)}
+          ></div>
         </div>
         <BoggleLine {...this.props} />
       </div>
     )
   }
 
+  // __() {
+  //   this.props.letter
+  // }
+
   _className() {
     let className = "BoggleTile"
-    className += this.props.isSelected || this.props.isSelectedKeyboard ? " selected" : ""
+    className += this.props.isSelected     || this.props.isSelectedKeyboard     ? " selected"     : ""
     className += this.props.isLastSelected || this.props.isLastSelectedKeyboard ? " lastSelected" : ""
     className += this.props.isSelectedKeyboard ? " keyboard" : ""
     return className
   }
 
   _select() {
+    console.log("tappa : ", this.props.selecting)
     // Don't select if already selected, or if selecting with keyboard
     if(!this.props.isSelected && !this.props.pathsForKeyboard.length) {
       this.props.actions.addLetter(this.props)
@@ -38,6 +48,17 @@ class BoggleTile extends Component {
       this._select()
     }
   }
+
+  _onTouchStart(e) {
+    e.preventDefault()
+    this._select()
+  }
+
+  // _onTouchMove(e) {
+  //   // console.log("boop")
+  //   console.log(e.changedTouches[0])
+  //   // this._onMouseOver()
+  // }
 }
 
 export default BoggleTile
