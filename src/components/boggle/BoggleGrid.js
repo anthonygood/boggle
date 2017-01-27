@@ -91,7 +91,6 @@ class BoggleGrid extends Component {
 
   // Detect and submit tiles being touched.
   _onTouchMove(e) {
-    console.log("touchmove")
     e.preventDefault()
 
     const lastTouch = e.changedTouches[0]
@@ -100,11 +99,7 @@ class BoggleGrid extends Component {
     const x = lastTouch.clientX
     const y = lastTouch.clientY
 
-    // console.log(xy)
-
     // Find the hitbox the touch event is currently over
-    // const hitboxes = document.getElementsByClassName("Hitbox")
-
     const hitbox = this._detectInHTMLCollection(
       this.hitboxes,
       (item) => {
@@ -118,12 +113,9 @@ class BoggleGrid extends Component {
     )
 
     if (hitbox) {
-      const id = hitbox.attributes["data-id"].value
-      const [x, y] = id.split("")
-
-      const letter = this.props.grid[y][x]
-
-      console.log(letter)
+      const id     = hitbox.attributes["data-id"].value,
+            [x, y] = id.split(""),
+            letter = this.props.grid[y][x]
 
       if(!this._isTileSelected(letter, this._currentMouseWordLetterIDs())) {
         this.props.actions.addLetter(letter)
@@ -138,8 +130,7 @@ class BoggleGrid extends Component {
 
   _detectInHTMLCollection(collection, callback) {
     const limit = collection.length - 1
-    let   i = 0,
-          bool
+    let   i = 0
 
     for(i; i < limit; i++) {
       const item = collection[i]

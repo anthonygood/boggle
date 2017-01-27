@@ -5,7 +5,7 @@ describe("boggleReducer", () => {
 
   it("returns default state when state parameter is undefined", () => {
     expect(state.gamePhase).toBe("notStarted")
-    expect(state.currentWord).toEqual([])
+    expect(state.pathForMouse).toEqual([])
     expect(state.foundWords).toEqual({})
     expect(state.grid).toEqual([])
     expect(state.score).toEqual(0)
@@ -24,7 +24,7 @@ describe("boggleReducer", () => {
       const selecting   = true
       const currentWord = [{letter: "C", value: 100},{letter: "A", value: 20},{letter: "T", value: 3}]
 
-      const someState = Object.assign({}, state, { currentWord, selecting })
+      const someState = Object.assign({}, state, { pathForMouse: currentWord, selecting })
       const newState  = boggle(someState, { type: "SUBMIT_WORD", word: "cat" })
 
       it("adds word to foundWords", () => {
@@ -40,13 +40,13 @@ describe("boggleReducer", () => {
       })
 
       it("updates lastSubmittedWord", () => {
-        expect(newState.lastSubmittedWord).toEqual({ letters: currentWord, status: "correct" })
+        expect(newState.lastSubmittedWord).toEqual({ asString: "cat", letters: currentWord, status: "correct" })
       })
     })
 
     context("incorrect", () => {
-      const currentWord = [{letter: "X"},{letter: "X"}]
-      const someState = Object.assign({}, state, { currentWord })
+      const pathForMouse = [{letter: "X"},{letter: "X"}]
+      const someState = Object.assign({}, state, { pathForMouse })
       const newState = boggle(someState, { type: "SUBMIT_WORD" })
 
       it("cancels selecting tiles", () => {
@@ -54,7 +54,7 @@ describe("boggleReducer", () => {
       })
 
       it("updates lastSubmittedWord", () => {
-        expect(newState.lastSubmittedWord).toEqual({ letters: currentWord, status: "incorrect" })
+        expect(newState.lastSubmittedWord).toEqual({ asString: "xx", letters: pathForMouse, status: "incorrect" })
       })
     })
   })
@@ -96,7 +96,7 @@ describe("boggleReducer", () => {
     )
 
     it("adds letter to currentWord", () => {
-      expect(newState.currentWord).toEqual([{
+      expect(newState.pathForMouse).toEqual([{
         letter: "X",
         baseValue: 1,
         multiplier: 5,
@@ -121,7 +121,7 @@ describe("boggleReducer", () => {
     )
 
       it("doesn't add letter", () => {
-        expect(furtherState.currentWord.length).toBe(1)
+        expect(furtherState.pathForMouse.length).toBe(1)
       })
     })
   })

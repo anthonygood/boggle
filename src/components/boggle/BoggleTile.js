@@ -21,10 +21,6 @@ class BoggleTile extends Component {
     )
   }
 
-  // __() {
-  //   this.props.letter
-  // }
-
   _className() {
     let className = "BoggleTile"
     className += this.props.isSelected     || this.props.isSelectedKeyboard     ? " selected"     : ""
@@ -53,12 +49,6 @@ class BoggleTile extends Component {
     e.preventDefault()
     this._select()
   }
-
-  // _onTouchMove(e) {
-  //   // console.log("boop")
-  //   console.log(e.changedTouches[0])
-  //   // this._onMouseOver()
-  // }
 }
 
 export default BoggleTile
