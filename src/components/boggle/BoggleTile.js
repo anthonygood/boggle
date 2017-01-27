@@ -30,7 +30,6 @@ class BoggleTile extends Component {
   }
 
   _select() {
-    console.log("tappa : ", this.props.selecting)
     // Don't select if already selected, or if selecting with keyboard
     if(!this.props.isSelected && !this.props.pathsForKeyboard.length) {
       this.props.actions.addLetter(this.props)
