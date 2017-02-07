@@ -34,7 +34,7 @@ export default (state = DEFAULT_STATE, action = {}) => {
     // TODO:
     // Separate reducer for gamePhase.
     case TYPES.START_GAME:
-      return Object.assign({}, state, { gamePhase: "started", grid: action.grid })
+      return Object.assign({}, state, { gamePhase: "started", grid: action.grid, words: action.words })
 
     case TYPES.END_GAME:
       return Object.assign({}, state, { gamePhase: "finished" })

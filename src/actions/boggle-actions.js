@@ -3,11 +3,30 @@ import makeGrid from "../lib/makeGrid"
 
 const GRID_SIZE = 4
 
-const startGame = () => {
-  const grid = makeGrid(GRID_SIZE)
+const play = (gameJSON) => {
+  window.grid = makeGrid(4)
   return {
     type: TYPES.START_GAME,
-    grid
+    grid: gameJSON.board,
+    words: gameJSON.words,
+    wordCount: gameJSON.word_count,
+    totalScore: gameJSON.total_score
+  }
+}
+
+const fetchGrid = () => {
+  return fetch("http://localhost:4000/grid").then(response => {
+    return response.json().then(json => json)
+  }).catch(error => {
+    throw error
+  })
+}
+
+const startGame = () => {
+  return (dispatch) => {
+    return fetchGrid().then((json) => {
+      return dispatch(play(json))
+    }).catch(error => { throw error })
   }
 }
 
