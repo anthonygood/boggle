@@ -1,10 +1,8 @@
 import * as TYPES from "./action-types"
-import makeGrid from "../lib/makeGrid"
 
 const GRID_SIZE = 4
 
 const play = (gameJSON) => {
-  window.grid = makeGrid(4)
   return {
     type: TYPES.START_GAME,
     grid: gameJSON.board,
@@ -22,11 +20,22 @@ const fetchGrid = () => {
   })
 }
 
+// `error` is the exception that was raised,
+// `action` refers to the action which caused it.
+const serverError = (error, action) => {
+  // Pass original error along with the action it has thwarted.
+  return { type: TYPES.SERVER_ERROR, actionError: action, error }
+}
+
 const startGame = () => {
   return (dispatch) => {
-    return fetchGrid().then((json) => {
+    return fetchGrid().then(json => {
       return dispatch(play(json))
-    }).catch(error => { throw error })
+    }).catch(error => {
+      // Annotate error
+      error.message = "action creator startGame failed: " + error.message
+      return dispatch(serverError(error, TYPES.START_GAME))
+    })
   }
 }
 

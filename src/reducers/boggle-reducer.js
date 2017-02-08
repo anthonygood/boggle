@@ -29,6 +29,14 @@ const onSubmitLetter = (state, letter) => {
   }
 }
 
+const serverError = (state, type, error) => {
+  if (error === TYPES.START_GAME) {
+    return Object.assign({}, state, { gamePhase: "error" })
+  } else {
+    throw error
+  }
+}
+
 export default (state = DEFAULT_STATE, action = {}) => {
   switch (action.type) {
     // TODO:
@@ -57,6 +65,10 @@ export default (state = DEFAULT_STATE, action = {}) => {
 
     case TYPES.ADD_LETTER_KEYBOARD:
       return onKeyboardAddLetter(state, action.letter)
+
+    case TYPES.SERVER_ERROR:
+      console.error(action.error)
+      return serverError(state, action.error, action.actionError)
 
     default:
       return state

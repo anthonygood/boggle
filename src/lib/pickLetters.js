@@ -26,7 +26,6 @@ export default (totalLetters) => {
     const random = rand(vowels.length)
 
     letterBag.push(
-      // vowels.slice(random, random+1)
       vowels.splice(random, 1).toString()
     )
   }

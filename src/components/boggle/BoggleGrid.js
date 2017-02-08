@@ -85,7 +85,6 @@ class BoggleGrid extends Component {
     const hitbox = this._detectInHTMLCollection(
       this.hitboxes,
       (item) => {
-        console.log(item)
         const rect = item.getBoundingClientRect()
 
         const isInX = (rect.left < x) && (x < rect.right)
@@ -95,14 +94,10 @@ class BoggleGrid extends Component {
       }
     )
 
-    console.log(hitbox)
-
     if (hitbox) {
       const id     = hitbox.attributes["data-id"].value,
             [x, y] = id.split(""),
             letter = this.props.grid[y][x]
-
-      console.log(letter)
 
       if(!this._isTileSelected(letter, this._currentMouseWordLetterIDs())) {
         this.props.actions.addLetter(letter)

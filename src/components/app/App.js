@@ -2,6 +2,7 @@ import "./App.css"
 import React, { Component } from "react"
 import Splash from "../splash/Splash"
 import Game from "../boggle/connected-game"
+import GameError from "../boggle/GameError"
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +29,8 @@ class App extends Component {
         return this._game()
       case "finished":
         return this._review()
+      case "error":
+        return this._gameError()
       default:
         return this._splash()
     }
@@ -44,6 +47,12 @@ class App extends Component {
   _review() {
     return (
       <div className="Review">Over</div>
+    )
+  }
+
+  _gameError() {
+    return (
+      <GameError { ...this.props.boggle } />
     )
   }
 }
