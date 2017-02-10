@@ -23,7 +23,8 @@ describe("boggleReducer", () => {
     context("correct", () => {
 
       const currentWord = [{letter: "C", value: 100},{letter: "A", value: 20},{letter: "T", value: 3}]
-      const someState   = Object.assign({}, state, { pathForMouse: currentWord, selecting: true })
+      const validWords  = [{word: "cat"}]
+      const someState   = Object.assign({}, state, { pathForMouse: currentWord, words: validWords, selecting: true })
       const newState    = boggle(someState, { type: "SUBMIT_WORD", word: "cat" })
 
       it("adds word to foundWords", () => {
@@ -47,7 +48,8 @@ describe("boggleReducer", () => {
 
       // Should apply 3x multiplier (which is the greatest word multiplier found in word)
       const word      = [{letter: "C", value: 100, word_multiplier: 1},{letter: "A", value: 20, word_multiplier: 3},{letter: "T", value: 3, word_multiplier: 2}]
-      const someState = Object.assign({}, state, { pathForMouse: word, selecting: true })
+      const validWords = [{word: "cat"}]
+      const someState = Object.assign({}, state, { pathForMouse: word, words: validWords, selecting: true })
       const newState  = boggle(someState, { type: "SUBMIT_WORD", word: "cat" })
 
       it("applies word multiplier", () => {
@@ -58,7 +60,7 @@ describe("boggleReducer", () => {
     context("incorrect", () => {
 
       const pathForMouse = [{letter: "X"},{letter: "X"}]
-      const someState = Object.assign({}, state, { pathForMouse })
+      const someState = Object.assign({}, state, { words: [], pathForMouse })
       const newState = boggle(someState, { type: "SUBMIT_WORD" })
 
       it("cancels selecting tiles", () => {

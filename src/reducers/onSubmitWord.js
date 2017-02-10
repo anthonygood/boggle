@@ -1,4 +1,6 @@
-import Checker from "../lib/Checker"
+const _testWord = (validWords, test) => {
+  return validWords.find((word) => { return word.word == test })
+}
 
 const _wordAlreadyFound = (state, currentWordAsString) => {
   return state.foundWords.hasOwnProperty(currentWordAsString)
@@ -69,9 +71,9 @@ const _handleDuplicateWord = (state, currentWordAsString, word) => {
 }
 
 const onSubmitWord = (state, currentWordAsString, bestPath) => {
-  if (_wordAlreadyFound(state, currentWordAsString)) { return _handleDuplicateWord(state, currentWordAsString, bestPath) }
-  else if (Checker.check(currentWordAsString))       { return _handleCorrectWord(state, currentWordAsString, bestPath)   }
-  else                                               { return _handleIncorrectWord(state, currentWordAsString, bestPath) }
+  if (_wordAlreadyFound(state, currentWordAsString))    { return _handleDuplicateWord(state, currentWordAsString, bestPath) }
+  else if (_testWord(state.words, currentWordAsString)) { return _handleCorrectWord(state, currentWordAsString, bestPath)   }
+  else                                                  { return _handleIncorrectWord(state, currentWordAsString, bestPath) }
 }
 
 export default onSubmitWord
