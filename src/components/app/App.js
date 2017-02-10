@@ -3,12 +3,9 @@ import React, { Component } from "react"
 import Splash from "../splash/Splash"
 import Game from "../boggle/connected-game"
 import GameError from "../boggle/GameError"
+import Review from "../review/Review"
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.props.actions.startGame()
-  }
 
   render() {
     return (
@@ -19,7 +16,6 @@ class App extends Component {
   }
 
   start() {
-    console.log("start!")
     this.props.actions.startGame()
   }
 
@@ -45,15 +41,11 @@ class App extends Component {
   }
 
   _review() {
-    return (
-      <div className="Review">Over</div>
-    )
+    return <Review startGame={ this.start.bind(this) } { ...this.props.boggle } />
   }
 
   _gameError() {
-    return (
-      <GameError { ...this.props.boggle } />
-    )
+    return <GameError />
   }
 }
 

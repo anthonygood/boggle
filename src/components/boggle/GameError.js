@@ -1,6 +1,7 @@
 import React from "react"
 import BoggleTile from "./connected-boggle-tile"
 
+
 export default (props) => {
   return (
     <div className="Game">

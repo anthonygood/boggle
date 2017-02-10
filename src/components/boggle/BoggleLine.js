@@ -61,12 +61,10 @@ class BoggleLine extends Component {
   _previousLetters() {
     return this._activePaths().map((path) => {
 
-      // Find this letter's index in path
+      // Find this letter's index in path.
       const index = path.findIndex((letter) => { return letter._id === this.props._id })
 
-      // Skip if the letter isn't in this path
-      if(!index) { return }
-
+      // May return undefined!
       return path[index-1]
     }).filter((letter) => { return typeof letter !== "undefined" })
   }

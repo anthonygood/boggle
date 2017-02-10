@@ -1,5 +1,5 @@
 const _testWord = (validWords, test) => {
-  return validWords.find((word) => { return word.word == test })
+  return validWords.find((word) => { return word.word === test })
 }
 
 const _wordAlreadyFound = (state, currentWordAsString) => {

@@ -3,8 +3,6 @@ import * as config from "../config"
 
 console.warn(config.API_END_POINT)
 
-const GRID_SIZE = 4
-
 const play = (gameJSON) => {
   return {
     type: TYPES.START_GAME,

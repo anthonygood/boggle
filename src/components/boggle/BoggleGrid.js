@@ -43,13 +43,13 @@ class BoggleGrid extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener("mouseup")
-    document.removeEventListener("mousedown")
-    document.removeEventListener("keydown")
+    document.removeEventListener("mouseup",   this._onMouseUp.bind(this))
+    document.removeEventListener("mousedown", this._onMouseDown.bind(this))
+    document.removeEventListener("keydown",   this._onKeyDown.bind(this))
 
-    document.removeEventListener("touchstart")
-    document.removeEventListener("touchmove")
-    document.removeEventListener("touchend")
+    document.removeEventListener("touchstart", this._onTouchStart.bind(this))
+    document.removeEventListener("touchmove",  this._onTouchMove.bind(this))
+    document.removeEventListener("touchend",   this._onTouchEnd.bind(this))
   }
 
   _onKeyDown(event) {
