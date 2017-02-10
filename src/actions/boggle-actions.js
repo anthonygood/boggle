@@ -1,4 +1,7 @@
 import * as TYPES from "./action-types"
+import * as config from "../config"
+
+console.warn(config.API_END_POINT)
 
 const GRID_SIZE = 4
 
@@ -13,7 +16,7 @@ const play = (gameJSON) => {
 }
 
 const fetchGrid = () => {
-  return fetch("http://localhost:4000/grid").then(response => {
+  return fetch(`${config.API_END_POINT}/grid`).then(response => {
     return response.json().then(json => json)
   }).catch(error => {
     throw error

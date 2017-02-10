@@ -21,18 +21,17 @@ describe("boggleReducer", () => {
 
   describe("SUBMIT_WORD", () => {
     context("correct", () => {
-      const selecting   = true
-      const currentWord = [{letter: "C", value: 100},{letter: "A", value: 20},{letter: "T", value: 3}]
 
-      const someState = Object.assign({}, state, { pathForMouse: currentWord, selecting })
-      const newState  = boggle(someState, { type: "SUBMIT_WORD", word: "cat" })
+      const currentWord = [{letter: "C", value: 100},{letter: "A", value: 20},{letter: "T", value: 3}]
+      const someState   = Object.assign({}, state, { pathForMouse: currentWord, selecting: true })
+      const newState    = boggle(someState, { type: "SUBMIT_WORD", word: "cat" })
 
       it("adds word to foundWords", () => {
         expect(newState.foundWords).toEqual({cat: currentWord}) // 2D array
       })
 
-      it("adds word value to score", () => {
-        expect(newState.score).toBe(123)
+      it("adds word value to score (including length bonus)", () => {
+        expect(newState.score).toBe(124) // 123 + 1 length bonus
       })
 
       it("cancels selecting tiles", () => {
@@ -44,7 +43,20 @@ describe("boggleReducer", () => {
       })
     })
 
+    context("correct (with word multiplier)", () => {
+
+      // Should apply 3x multiplier (which is the greatest word multiplier found in word)
+      const word      = [{letter: "C", value: 100, word_multiplier: 1},{letter: "A", value: 20, word_multiplier: 3},{letter: "T", value: 3, word_multiplier: 2}]
+      const someState = Object.assign({}, state, { pathForMouse: word, selecting: true })
+      const newState  = boggle(someState, { type: "SUBMIT_WORD", word: "cat" })
+
+      it("applies word multiplier", () => {
+        expect(newState.score).toBe(372)
+      })
+    })
+
     context("incorrect", () => {
+
       const pathForMouse = [{letter: "X"},{letter: "X"}]
       const someState = Object.assign({}, state, { pathForMouse })
       const newState = boggle(someState, { type: "SUBMIT_WORD" })
@@ -60,6 +72,7 @@ describe("boggleReducer", () => {
   })
 
   describe("START_GAME", () => {
+
     const grid = ["someGrid"]
     const newState = boggle(state, { type: "START_GAME", grid })
 

@@ -4,12 +4,49 @@ const _wordAlreadyFound = (state, currentWordAsString) => {
   return state.foundWords.hasOwnProperty(currentWordAsString)
 }
 
+const _lengthBonus = (length) => {
+  switch(length) {
+    case 1:
+    case 2:
+      return 0
+    case 3:
+      return 1
+    case 4:
+      return 2
+    case 5:
+      return 3
+    case 6:
+      return 5
+    case 7:
+      return 8
+    case 8:
+      return 10
+    case 9:
+      return 15
+    default:
+      return 20
+  }
+}
+
+// `word` parameter should be array of letters.
+const _scoreWord = (word) => {
+  const baseScore  = word.reduce((a,b) => { return a + b.value }, 0)
+  const multiplier = word.reduce((greatest, next) => {
+    // Protect against undefined word_multiplier
+    if(!next.word_multiplier) { return greatest }
+
+    return greatest > next.word_multiplier ? greatest : next.word_multiplier
+  }, 1)
+
+  const lengthBonus = _lengthBonus(word.length)
+
+  return (baseScore + lengthBonus) * multiplier
+}
+
 const _handleCorrectWord = (state, currentWordAsString, word) => {
   // currentWordAsString == "cat"
   //   state.currentWord == [{c}{a}{t}]
-  // TODO:
-  // Account for keyboard input? Or use separate function.
-  const score = state.score + word.reduce((a,b) => { return a + b.value }, 0)
+  const score = state.score + _scoreWord(word)
 
   let wordObj = {}
   wordObj[currentWordAsString] = word
