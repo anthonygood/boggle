@@ -12,7 +12,7 @@ class Timer extends Component {
   render() {
     return (
       <div className="Timer">
-        { this.state.secondsRemaining }
+        { this._format() }
       </div>
     )
   }
@@ -40,6 +40,14 @@ class Timer extends Component {
     } else {
       this.props.onTimeout()
     }
+  }
+
+  _format() {
+    let   secs = this.state.secondsRemaining
+    const mins = Math.floor( secs / 60 )
+          secs -= (mins * 60)
+          secs = secs < 10 ? "0" + secs : secs
+    return `${mins}:${secs}`
   }
 }
 

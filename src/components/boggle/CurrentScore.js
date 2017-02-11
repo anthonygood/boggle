@@ -8,7 +8,7 @@ class CurrentScore extends Component {
   }
 
   _initialState() {
-    // CurrentScore will transition between score values
+    // CurrentScore relies on UIScore to transition between score values.
     return {
       UIScore: 0
     }
@@ -42,7 +42,7 @@ class CurrentScore extends Component {
 
       this.counterTimer = setTimeout(
         this._countUp.bind(this, score),
-        100
+        75 // TODO: variable increment speed?
       )
     }
   }

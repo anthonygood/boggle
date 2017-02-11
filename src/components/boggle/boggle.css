@@ -34,7 +34,7 @@
 
 .BoggleTile.selected {
   z-index: 2;
-  background-color: #F2C924;
+  background-color: #ffe612;
   color: rgb(100, 100, 100);
   box-shadow: none;
 }

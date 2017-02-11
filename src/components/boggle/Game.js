@@ -4,7 +4,7 @@ import CurrentWord from "../boggle/CurrentWord"
 import BoggleGrid from "../boggle/BoggleGrid"
 import Timer from "../boggle/Timer"
 
-const DURATION_SECONDS = 5
+const DURATION_SECONDS = 15
 
 // Top-level component for during gameplay
 class Game extends Component {
