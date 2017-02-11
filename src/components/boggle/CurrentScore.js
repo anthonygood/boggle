@@ -1,10 +1,57 @@
 import "./current-score.css"
-import React from "react"
+import React, { Component } from "react"
 
-export default (props) => {
-  return (
-    <div className="CurrentScore">
-      {props.score}
-    </div>
-  )
+class CurrentScore extends Component {
+  constructor(props) {
+    super(props)
+    this.state = this._initialState()
+  }
+
+  _initialState() {
+    // CurrentScore will transition between score values
+    return {
+      UIScore: 0
+    }
+  }
+
+
+  render() {
+    return (
+      <div className="CurrentScore">
+        {this.state.UIScore}
+      </div>
+    )
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._countUp(nextProps.score)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.counterTimer)
+  }
+
+  _countUp(score) {
+    clearTimeout(this.counterTimer)
+
+    if(score > this.state.UIScore) {
+
+      this.setState({
+        UIScore: this.state.UIScore + 1
+      })
+
+      this.counterTimer = setTimeout(
+        this._countUp.bind(this, score),
+        100
+      )
+    }
+  }
+
+  _getTransitionScore() {
+    if(this.props.score > this.state.UIScore) {
+      this.setState({ UIScore: this.props.score })
+    }
+  }
 }
+
+export default CurrentScore

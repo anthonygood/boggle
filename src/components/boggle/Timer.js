@@ -1,10 +1,12 @@
+import "./timer.css"
 import React, { Component } from "react"
+
 
 class Timer extends Component {
   constructor(props) {
     super(props)
 
-    this.state = this._initialState(props)
+    this.state = { secondsRemaining: props.countdownFrom }
   }
 
   render() {
@@ -21,10 +23,6 @@ class Timer extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.timer)
-  }
-
-  _initialState(props) {
-    return { secondsRemaining: props.countdownFrom }
   }
 
   _countdown() {
