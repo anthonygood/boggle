@@ -1,0 +1,18 @@
+.Review {
+  /*background-color: rebeccapurple;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Review::after {
+  background-color: firebrick;
+
+  background: linear-gradient(135deg, firebrick 0%, #ff0909 100%);
+
+  /*background: linear-gradient(135deg, rgba(255,171,76,1) 0%,rgba(237,118,0,1) 100%);*/
+}
+
+.Review .Button {
+  color: firebrick;
+}

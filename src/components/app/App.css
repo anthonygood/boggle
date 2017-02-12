@@ -22,3 +22,52 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* .screen element will take up full height and width of screen. */
+.screen {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.screen::after {
+  transform: translateZ(0);
+  content: "";
+  position: absolute;
+  height: 300vh; /* for scrolling */
+  width: 100vw;
+  top: -100vh;
+  left: 0;
+  z-index: -1;
+}
+
+/* ===================== */
+/* Transition Animations */
+/* ===================== */
+.main-appear, .main-enter {
+  position: absolute;
+  bottom: 100%;
+}
+
+.main-appear.main-appear-active, .main-enter.main-enter-active {
+  bottom: 0%;
+  transition: bottom 1000ms ease-in;
+}
+
+.main-appear::after, .main-enter::after, .main-leave.main-leave-active::after {
+  opacity: 0;
+}
+
+.main-appear.main-appear-active::after, .main-enter.main-enter-active::after, .main-leave::after {
+  opacity: 1;
+  transition: 1000ms ease-in;
+}
+
+.main-leave {
+  position: absolute;
+  top: 0%;
+}
+
+.main-leave.main-leave-active {
+  top: 100%;
+  transition: 1000ms ease-in;
+}

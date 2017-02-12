@@ -1,11 +1,17 @@
+import "./Review.css"
 import React, { Component } from "react"
+import Button from "../Button/Button"
 
 class Review extends Component {
   render() {
     return (
-      <div className="Review">
-        <div className="PreviousWord">Game<br/>Over</div>
-        <div className="PlayAgain btn" onClick={ this.props.startGame.bind(this) }>Play again</div>
+      <div className="Review screen">
+        <div className="main">
+          <div className="PreviousWord">Game<br/>Over</div>
+          <Button className="PlayAgain Button" onClick={ this.props.startGame.bind(this) }>
+            Play again
+          </Button>
+        </div>
       </div>
     )
   }

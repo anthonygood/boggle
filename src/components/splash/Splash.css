@@ -1,3 +1,31 @@
 .Splash {
   color: purple;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Splash::after {
+  content: "";
+
+  background: linear-gradient(270deg, #00bfff, #2de5ff);
+  background-size: 400% 400%;
+
+  animation: SplashGradient 10s ease infinite;
+}
+
+.Splash .Button {
+  color: deepskyblue;
+}
+
+.Splash .Button.active {
+  color: #fa6800;
+  background-color: #ffe612;
+}
+
+@keyframes SplashGradient {
+  0%   {background-position:50% 0%}
+  50%  {background-position:50% 100%}
+  100% {background-position:50% 0%}
 }

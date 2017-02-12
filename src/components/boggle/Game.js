@@ -1,17 +1,19 @@
+import "./Game.css"
+
 import React, { Component } from "react"
 import CurrentScore from "../boggle/CurrentScore"
 import CurrentWord from "../boggle/CurrentWord"
 import BoggleGrid from "../boggle/BoggleGrid"
 import Timer from "../boggle/Timer"
 
-const DURATION_SECONDS = 15
+const DURATION_SECONDS = 5
 
 // Top-level component for during gameplay
 class Game extends Component {
 
   render() {
     return (
-      <div className="Game">
+      <div className="Game screen">
         <Timer countdownFrom={ DURATION_SECONDS } onTimeout={ this._gameOver.bind(this) } />
         <CurrentScore score={ this.props.score } />
         <CurrentWord
@@ -24,6 +26,7 @@ class Game extends Component {
   }
 
   _gameOver() {
+    this.props.actions.submitWord()
     this.props.actions.endGame()
   }
 }

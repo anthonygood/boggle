@@ -1,16 +1,25 @@
 import "./App.css"
+import "../Button/Button.css"
 import React, { Component } from "react"
 import Splash from "../splash/Splash"
 import Game from "../boggle/connected-game"
 import GameError from "../boggle/GameError"
 import Review from "../review/Review"
+import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 
 class App extends Component {
 
   render() {
     return (
       <div className="App">
-        { this._innerContent(this.props.boggle.gamePhase) }
+        <ReactCSSTransitionGroup
+          transitionName="main"
+          transitionAppear={false}
+          transitionAppearTimeout={1000}
+          transitionEnterTimeout={1000}
+          transitionLeaveTimeout={1000} >
+          { this._innerContent(this.props.boggle.gamePhase) }
+        </ReactCSSTransitionGroup>
       </div>
     )
   }
@@ -33,19 +42,19 @@ class App extends Component {
   }
 
   _splash() {
-    return <Splash startGame={ this.start.bind(this) } { ...this.props.boggle } />
+    return <Splash key="splash" startGame={ this.start.bind(this) } { ...this.props.boggle } />
   }
 
   _game() {
-    return <Game { ...this.props.boggle } />
+    return <Game key="game" { ...this.props.boggle } />
   }
 
   _review() {
-    return <Review startGame={ this.start.bind(this) } { ...this.props.boggle } />
+    return <Review key="review" startGame={ this.start.bind(this) } { ...this.props.boggle } />
   }
 
   _gameError() {
-    return <GameError />
+    return <GameError key="error" />
   }
 }
 

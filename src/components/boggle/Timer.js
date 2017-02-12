@@ -17,7 +17,7 @@ class Timer extends Component {
     )
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this._countdown()
   }
 

@@ -1,0 +1,3 @@
+.Game::after {
+  background: linear-gradient(135deg, rgba(255,171,76,1) 0%,rgba(237,118,0,1) 100%);
+}
